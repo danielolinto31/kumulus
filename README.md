@@ -8,6 +8,7 @@ Este é um projeto simples, de cadastro de pessoas e endereços, que demonstra u
 ### Desenvolvido por:
 
 - Daniel Olinto de Araújo
+- Disponibilizado em <https://github.com/danielolinto31/kumulus>
 
 ### Tecnologias e ferramentas utilizadas:
 
@@ -24,8 +25,8 @@ Este é um projeto simples, de cadastro de pessoas e endereços, que demonstra u
 
 ### Plugins instalados na IDE:
 
-- [Lombok:1.18.36]
-- SonarQube (SonarLint): MarketPlace do Eclipse IDE
+- **[Lombok:1.18.36]**
+- **SonarQube (SonarLint):** MarketPlace do Eclipse IDE
 
 ### Decisões técnicas e arquiteturais, e bônus:
 
@@ -149,21 +150,27 @@ Este é um projeto simples, de cadastro de pessoas e endereços, que demonstra u
     DB_APP_DRIVER=org.postgresql.Driver
     DB_APP_DIALECT=org.hibernate.dialect.PostgreSQLDialect
     DB_APP_HBM2DDL=update
-    DB_APP_SHOW_SQL=true
+    DB_APP_SHOW_SQL=false
     DB_APP_MIN_POOL_SIZE=2
     DB_APP_MAX_POOL_SIZE=10
     DB_APP_ACQUIRE_INCREMENT=1
     DB_APP_MAX_IDLE_TIME=200
     ```
     _Obs.: Verificar se a URL, User e Password estão configurados corretamente._
-    - Faça o _download_ do projeto (`kumulus.zip` ou `kumulus.war`) e descompacte no workspace do Eclipse.
+    - Faça o _download_ do projeto (`kumulus.zip` ou `kumulus.war`) e descompacte no diretório do workspace do Eclipse ou no git.
         - O projeto também foi disponibilizado no GitHub: 
     - Importe o projeto no Eclipse selecionando a opção `Existing Maven Projects`.
-5. Caso o projeto não rode por não encontrar as classes `org.springframework.web.context.ContextLoaderListener` e `org.springframework.web.context.request.RequestContextListener`, faça o seguinte:
+5. No menu, procurar o ícone do `Run maven install`, clicar em `External Tools Configurations...` e preencher em `Program`:
+	- Name: `maven install`.
+	- Location: `C:\apache-maven-3.9.9\bin\mvn.cmd`.
+	- Working Directory: `${project_loc}`.
+	- Arguments: `clean eclipse:eclipse install`.
+	- Após preenchido, clicar em `Apply` e `Run` para fazer o _build_ do projeto.
+6. Caso o projeto não rode por não encontrar as classes `org.springframework.web.context.ContextLoaderListener` e `org.springframework.web.context.request.RequestContextListener`, faça o seguinte:
     - Clique com o botão direito em cima do projeto e vá em `Properties`.
     - Pesquise ou ache a opção `Deployment Assembly`.
-    - Clique em `Add...` -> `Java Build Path Entries`, adicione adicione todos as dependências e clique em `Finish`.
-6. Agora é possível executar o projeto.
+    - Clique em `Add...` -> `Java Build Path Entries`, adicione todas as dependências e clique em `Finish`.
+7. Agora é possível executar o projeto, basta iniciar o servidor Tomcat dentro do Eclipse IDE.
     - Caso execute com sucesso, basta colocar a URL no navegador: <http://localhost:8080/kumulus/>
 
 [//]: # (Referências de links)

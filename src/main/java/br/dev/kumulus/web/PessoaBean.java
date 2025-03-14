@@ -38,7 +38,6 @@ import br.dev.kumulus.arq.commons.utils.DateUtils;
 import br.dev.kumulus.arq.commons.utils.Utils;
 import br.dev.kumulus.arq.controls.AbstractCrudBean;
 import br.dev.kumulus.arq.exception.ServiceBusinessException;
-import br.dev.kumulus.dao.LazyEnderecoDataModel;
 import br.dev.kumulus.dao.LazyPessoaDataModel;
 import br.dev.kumulus.domain.Endereco;
 import br.dev.kumulus.domain.Pessoa;
@@ -73,7 +72,6 @@ public class PessoaBean extends AbstractCrudBean<Pessoa, PessoaService> {
 	private transient ViaCep viaCep = new ViaCepServiceImpl();
 
 	private LazyDataModel<Pessoa> pessoaModel;
-	private LazyDataModel<Endereco> enderecoModel;
 	private List<Pessoa> pessoaList;
 	private List<Sexo> sexoList;
 	private List<Endereco> enderecoList;
@@ -97,10 +95,7 @@ public class PessoaBean extends AbstractCrudBean<Pessoa, PessoaService> {
 		this.pessoaList = new ArrayList<>();
 		this.sexoList = Arrays.asList(Sexo.values());
 		this.enderecoList = new ArrayList<>();
-
 		pessoaModel = new LazyPessoaDataModel(getService().findByAttributes(getEntity()));
-		//enderecoModel = new LazyEnderecoDataModel(enderecoService.findByAttributes(endereco));
-
 		personalizacaoExportacao();
 	}
 
