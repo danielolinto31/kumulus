@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<faces-config version="2.0"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+	<name>kumulus</name>
+
+	<application>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+		<system-event-listener>
+			<system-event-listener-class>br.dev.kumulus.arq.commons.utils.ViewScopeCallbackRegister</system-event-listener-class>
+			<system-event-class>javax.faces.event.PostConstructViewMapEvent</system-event-class>
+			<source-class>javax.faces.component.UIViewRoot</source-class>
+		</system-event-listener>
+		<system-event-listener>
+			<system-event-listener-class>br.dev.kumulus.arq.commons.utils.ViewScopeCallbackRegister</system-event-listener-class>
+			<system-event-class>javax.faces.event.PreDestroyViewMapEvent</system-event-class>
+			<source-class>javax.faces.component.UIViewRoot</source-class>
+		</system-event-listener>
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>config</base-name>
+			<var>cfg</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>log4j</base-name>
+			<var>log</var>
+		</resource-bundle>
+	</application>
+</faces-config>

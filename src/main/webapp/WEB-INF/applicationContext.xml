@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- * Copyright (c) 2012, Tribunal de Justiça do RN. * Todos os direitos 
+	reservados. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+    http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+
+	<bean id="placeholderConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:config.properties" />
+	</bean>
+
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+	<context:annotation-config />
+	<context:component-scan
+		base-package="br.dev.kumulus" />
+	<aop:aspectj-autoproxy />
+
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${db.app.driver}" />
+		<property name="jdbcUrl" value="${db.app.url}" />
+		<property name="user" value="${db.app.user}" />
+		<property name="password" value="${db.app.password}" />
+		<property name="minPoolSize"
+			value="${db.app.c3p0.minPoolSize}" />
+		<property name="maxPoolSize"
+			value="${db.app.c3p0.maxPoolSize}" />
+		<property name="acquireIncrement"
+			value="${db.app.c3p0.acquireIncrement}" />
+		<property name="maxIdleTime"
+			value="${db.app.c3p0.maxIdleTime}" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="br.dev.kumulus.domain" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">${db.app.hibernate.showsql}</prop>
+				<prop key="hibernate.dialect">${db.app.hibernate.dialect}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${db.app.hibernate.hbm2ddl}</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="hibernateTemplate"
+		class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+	<bean
+		class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		<property name="scopes">
+			<map>
+				<entry key="view">
+					<bean class="br.dev.kumulus.arq.commons.utils.ViewScope" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+</beans>

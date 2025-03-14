@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:m="http://java.sun.com/jsf/composite/template"
+	template="/resources/template/template.xhtml">
+
+	<ui:define name="title">Erro</ui:define>
+
+	<ui:define name="content">
+		<div
+			class="flex align-items-center justify-content-center absolute top-50 left-50 w-10 sm:w-8 md:w-6 lg:w-5 xl:w-4"
+			style="margin-right: -50%; transform: translate(-50%, -50%)">
+			<div class="surface-card p-4 shadow-2 border-round w-full">
+				<div class="text-center mb-5">
+					<i
+						class="fa fa-triangle-exclamation text-8xl text-red-400 my-4"></i>
+					<div class="text-900 text-5xl text-red-400 font-medium mb-3">Erro!</div>
+					<span class="text-600 font-medium line-height-3">Ocorreu um
+						erro inesperado. Em casos críticos, talvez seja a hora de
+						reiniciar o servidor web.</span>
+				</div>
+
+				<div>
+					<p:button value="Voltar" icon="fa fa-rotate-left"
+						href="#" onclick="history.back()"
+						styleClass="w-full bg-red-400 border-red-400" />
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
