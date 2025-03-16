@@ -1,399 +1,392 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:jsf="http://xmlns.jcp.org/jsf"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	template="/resources/template/template.xhtml">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/resources/template/template.xhtml">
 
-	<ui:define name="title">Cadastro de Pessoas</ui:define>
+    <ui:define name="title">Cadastro de Pessoas</ui:define>
 
-	<ui:define name="content">
-		<div class="conteudo">
-			<div class="flex align-items-center justify-content-center">
-				<div
-					class="surface-card p-4 shadow-2 border-round w-full w-11 lg:w-9">
+    <ui:define name="content">
+        <div id="conteudo" class="conteudo">
+            <div class="flex align-items-center justify-content-center">
+                <div
+                        class="surface-card p-4 shadow-2 border-round w-full w-11 lg:w-9">
 
-					<div class="flex justify-content-center mb-6">
-						<p:link href="#{propertySourceConfig.appUrl}"
-							title="Página inicial" styleClass="text-center">
-							<p:graphicImage library="images" width="120"
-								name="#{propertySourceConfig.appLogo}"
-								alt="Imagem da logomarca do projeto" />
-							<div class="text-900 text-3xl font-medium">Formulário de
-								Cadastro de Pessoas</div>
-							<div class="text-600 font-medium line-height-3">Preencha os
-								campos abaixo:</div>
-						</p:link>
-					</div>
+                    <div class="flex justify-content-center mb-6">
+                        <p:link href="#{propertySourceConfig.appUrl}"
+                                title="Página inicial" styleClass="text-center">
+                            <p:graphicImage library="images" width="120"
+                                            name="#{propertySourceConfig.appLogo}"
+                                            alt="Imagem da logomarca do projeto"/>
+                            <div class="text-900 text-3xl font-medium">Kumulus - Cadastro de Pessoas</div>
+                            <div class="text-600 font-medium line-height-3">Preencha os
+                                campos abaixo:
+                            </div>
+                        </p:link>
+                    </div>
 
-					<h:form id="formSave" prependId="false">
-						<p:growl id="messages" keepAlive="true" life="10000" />
+                    <h:form id="formSave" prependId="false">
+                        <p:growl id="messages" keepAlive="true" life="10000"/>
 
-						<div class="formgrid grid">
-							<div
-								class="field col-12 sm:col-3 md:col-2 lg:col-2 xl:col-2 align-content-end">
-								<p:outputLabel for="@next" value="CPF:" styleClass="block" />
-								<p:inputMask id="cpf" mask="999.999.999-99"
-									placeholder="___.___.___-__" value="#{pessoaBean.entity.cpf}"
-									disabled="#{pessoaBean.actionView}" styleClass="w-full" />
-							</div>
-							<div
-								class="field col-12 sm:col-9 md:col-6 lg:col-6 xl:col-6 align-content-end">
-								<p:outputLabel for="@next" value="Nome completo:"
-									styleClass="block" />
-								<p:inputText id="nome" value="#{pessoaBean.entity.nome}"
-									disabled="#{pessoaBean.actionView}" styleClass="block w-full" />
-							</div>
-							<div
-								class="field col-6 sm:col-3 md:col-2 lg:col-2 xl:col-2 align-content-end">
-								<p:outputLabel for="@next" value="Data de nascimento:"
-									styleClass="block" />
-								<p:calendar id="dataNascimento" mask="true" pattern="dd/MM/yyyy"
-									value="#{pessoaBean.entity.dataNascimento}" locale="pt_BR"
-									effectDuration="fast" navigator="true" showButtonPanel="true"
-									yearRange="c-100:c+0" maxdate="#{pessoaBean.dataAtual}"
-									placeholder="__/__/____" disabled="#{pessoaBean.actionView}"
-									styleClass="block w-full" buttonTabindex="-1"
-									showTodayButton="false"
-									validatorMessage="O campo &quot;data de nascimento&quot; não pode ser uma data futura.">
-									<p:ajax event="dateSelect" update="messages dataNascimento"
-										listener="#{pessoaBean.validateDate}" />
-									<p:ajax event="change" update="messages dataNascimento"
-										listener="#{pessoaBean.validateDate}" />
-								</p:calendar>
-							</div>
-							<div
-								class="field col-6 sm:col-3 md:col-2 lg:col-2 xl:col-2 align-content-end">
-								<p:outputLabel for="@next" value="Sexo:" styleClass="block" />
-								<p:selectOneMenu id="sexo" value="#{pessoaBean.entity.sexo}"
-									disabled="#{pessoaBean.actionView}" styleClass="w-full">
-									<f:selectItem itemLabel="-- Selecione --" />
-									<f:selectItems value="#{pessoaBean.sexoList}" var="sexo"
-										itemValue="#{sexo}" itemLabel="#{sexo.descricao}" />
-									<p:ajax process="@this" />
-								</p:selectOneMenu>
-							</div>
-							<div class="field col-12">
-								<p:dataTable id="dtTableEndereco" var="obj" styleClass="w-full"
-									value="#{pessoaBean.entity.enderecoList}" paginator="true"
-									rows="5" scrollWidth="100%" paginatorPosition="bottom"
-									paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
-									currentPageReportTemplate="Página {currentPage} de {totalPages} - Total de {totalRecords} registro(s)"
-									emptyMessage="Nenhum registro foi encontrado."
-									scrollable="true">
+                        <div class="formgrid grid">
+                            <div
+                                    class="field col-12 sm:col-3 md:col-2 lg:col-2 xl:col-2 align-content-end">
+                                <p:outputLabel for="@next" value="CPF:" styleClass="block"/>
+                                <p:inputMask id="cpf" mask="999.999.999-99"
+                                             placeholder="___.___.___-__" value="#{pessoaBean.entity.cpf}"
+                                             disabled="#{pessoaBean.actionView}" styleClass="w-full"/>
+                            </div>
+                            <div
+                                    class="field col-12 sm:col-9 md:col-6 lg:col-6 xl:col-6 align-content-end">
+                                <p:outputLabel for="@next" value="Nome completo:"
+                                               styleClass="block"/>
+                                <p:inputText id="nome" value="#{pessoaBean.entity.nome}"
+                                             disabled="#{pessoaBean.actionView}" styleClass="block w-full"/>
+                            </div>
+                            <div
+                                    class="field col-6 sm:col-3 md:col-2 lg:col-2 xl:col-2 align-content-end">
+                                <p:outputLabel for="@next" value="Data de nascimento:"
+                                               styleClass="block"/>
+                                <p:calendar id="dataNascimento" mask="true" pattern="dd/MM/yyyy"
+                                            value="#{pessoaBean.entity.dataNascimento}" locale="pt_BR"
+                                            effectDuration="fast" navigator="true" showButtonPanel="true"
+                                            yearRange="c-100:c+0" maxdate="#{pessoaBean.dataAtual}"
+                                            placeholder="__/__/____" disabled="#{pessoaBean.actionView}"
+                                            styleClass="block w-full" buttonTabindex="-1"
+                                            showTodayButton="false"
+                                            validatorMessage="O campo &quot;data de nascimento&quot; não pode ser uma data futura.">
+                                    <p:ajax event="dateSelect" update="messages dataNascimento"
+                                            listener="#{pessoaBean.validateDate}"/>
+                                    <p:ajax event="change" update="messages dataNascimento"
+                                            listener="#{pessoaBean.validateDate}"/>
+                                </p:calendar>
+                            </div>
+                            <div
+                                    class="field col-6 sm:col-3 md:col-2 lg:col-2 xl:col-2 align-content-end">
+                                <p:outputLabel for="@next" value="Sexo:" styleClass="block"/>
+                                <p:selectOneMenu id="sexo" value="#{pessoaBean.entity.sexo}"
+                                                 disabled="#{pessoaBean.actionView}" styleClass="w-full">
+                                    <f:selectItem itemLabel="-- Selecione --"/>
+                                    <f:selectItems value="#{pessoaBean.sexoList}" var="sexo"
+                                                   itemValue="#{sexo}" itemLabel="#{sexo.descricao}"/>
+                                    <p:ajax process="@this"/>
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="field col-12">
+                                <p:dataTable id="dtTableEndereco" var="obj" styleClass="w-full"
+                                             value="#{pessoaBean.entity.enderecoList}" paginator="true"
+                                             rows="5" scrollWidth="100%" paginatorPosition="bottom"
+                                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+                                             currentPageReportTemplate="Página {currentPage} de {totalPages} - Total de {totalRecords} registro(s)"
+                                             emptyMessage="Nenhum registro foi encontrado."
+                                             scrollable="true">
 
-									<f:facet name="header">
-										<div class="flex align-items-center justify-content-between">
-											<span>Lista de endereços</span>
-											<div>
-												<p:commandButton value="Cadastrar endereço"
-													title="Cadastrar endereço" process="@this"
-													actionListener="#{pessoaBean.prepararNovoEndereco()}"
-													update="formEndereco" icon="fa fa-plus"
-													oncomplete="PF('dlgEndereco').show();"
-													disabled="#{pessoaBean.actionView}" />
-											</div>
-										</div>
-									</f:facet>
+                                    <f:facet name="header">
+                                        <div class="flex align-items-center justify-content-between">
+                                            <span>Lista de endereços</span>
+                                            <div>
+                                                <p:commandButton value="Cadastrar endereço"
+                                                                 title="Cadastrar endereço" process="@this"
+                                                                 actionListener="#{pessoaBean.prepararNovoEndereco()}"
+                                                                 update="formEndereco" icon="fa fa-plus"
+                                                                 oncomplete="PF('dlgEndereco').show();"
+                                                                 disabled="#{pessoaBean.actionView}"/>
+                                            </div>
+                                        </div>
+                                    </f:facet>
 
-									<f:facet name="footer">
-										<div class="flex gap-3">
-											<p:commandLink title="Exportar PDF" process="@this"
-												styleClass="text-red-400 hover:text-red-600">
-												<i class="fa fa-file-pdf fa-lg" />
-												<p:dataExporter type="pdf" target="dtTableEndereco"
-													fileName="enderecos" encoding="UTF-8"
-													preProcessor="#{pessoaBean.preProcessEnderecosPDF}"
-													options="#{pessoaBean.pdfOpt}" />
-											</p:commandLink>
-											<p:commandLink title="Exportar Excel" process="@this"
-												styleClass="text-green-400 hover:text-green-600">
-												<i class="fa fa-file-csv fa-lg" />
-												<p:dataExporter type="csv" target="dtTableEndereco"
-													fileName="enderecos" />
-											</p:commandLink>
-										</div>
-									</f:facet>
+                                    <f:facet name="footer">
+                                        <div class="flex gap-3">
+                                            <p:commandLink title="Exportar PDF" process="@this"
+                                                           styleClass="text-red-400 hover:text-red-600">
+                                                <i class="fa fa-file-pdf fa-lg"/>
+                                                <p:dataExporter type="pdf" target="dtTableEndereco"
+                                                                fileName="enderecos" encoding="UTF-8"
+                                                                preProcessor="#{pessoaBean.preProcessEnderecosPDF}"
+                                                                options="#{pessoaBean.pdfOpt}"/>
+                                            </p:commandLink>
+                                            <p:commandLink title="Exportar Excel" process="@this"
+                                                           styleClass="text-green-400 hover:text-green-600">
+                                                <i class="fa fa-file-csv fa-lg"/>
+                                                <p:dataExporter type="csv" target="dtTableEndereco"
+                                                                fileName="enderecos"/>
+                                            </p:commandLink>
+                                        </div>
+                                    </f:facet>
 
-									<p:column headerText="CEP" field="cep"
-										filterMatchMode="contains"
-										styleClass="w-8rem xl:w-1 text-center">
-										<h:outputText value="#{obj.cep}" />
-									</p:column>
-									<p:column headerText="UF" field="uf" filterMatchMode="exact"
-										styleClass="w-8rem xl:w-1 text-center">
-										<h:outputText value="#{obj.uf}" />
-									</p:column>
-									<p:column headerText="Cidade" field="cidade"
-										filterMatchMode="contains"
-										styleClass="w-16rem xl:w-2 text-center">
-										<h:outputText value="#{obj.cidade}" />
-									</p:column>
-									<p:column headerText="Bairro" field="bairro"
-										filterMatchMode="contains"
-										styleClass="w-16rem xl:w-2 text-center">
-										<h:outputText value="#{obj.bairro}" />
-									</p:column>
-									<p:column headerText="Logradouro" field="logradouro"
-										filterMatchMode="contains"
-										styleClass="w-16rem xl:w-2 text-center">
-										<h:outputText value="#{obj.logradouro}" />
-									</p:column>
-									<p:column headerText="Número" field="numero"
-										filterMatchMode="exact" styleClass="w-8rem xl:w-1 text-center">
-										<h:outputText value="#{obj.numero}" />
-									</p:column>
-									<p:column headerText="Complemento" field="complemento"
-										filterMatchMode="contains"
-										styleClass="w-16rem xl:w-2 text-center">
-										<h:outputText
-											value="#{empty obj.complemento ? '-' : obj.complemento}" />
-									</p:column>
-									<p:column headerText="Ações" styleClass="w-10rem xl:w-1"
-										exportable="false">
-										<div class="flex flex-column">
-											<p:commandLink id="btnEditEndereco"
-												title="Alterar #{obj.label}"
-												actionListener="#{pessoaBean.carregarEndereco(obj)}"
-												process="@this" oncomplete="PF('dlgEndereco').show();"
-												icon="fa fa-pencil" update="formEndereco"
-												disabled="#{pessoaBean.actionView}"
-												styleClass="hover:text-blue-800">
-												<i class="fa fa-pencil mr-2" />Alterar
-												</p:commandLink>
-											<p:commandLink id="btnDeleteEndereco"
-												title="Excluir #{obj.label}"
-												actionListener="#{pessoaBean.excluirEndereco(obj)}"
-												icon="fa fa-close" update="formSave formList messages"
-												styleClass="text-red-400 hover:text-red-600"
-												disabled="#{pessoaBean.actionView}">
-												<p:confirm header="Exclusão de registro"
-													message="Deseja realmente excluir este registro?"
-													icon="fa fa-exclamation-triangle" />
-												<p:ajax update="messages" />
-												<f:setPropertyActionListener value="#{obj}"
-													target="#{pessoaBean.endereco}" />
-												<i class="fa fa-exclamation-triangle mr-2" />Excluir
-												</p:commandLink>
-										</div>
-									</p:column>
-								</p:dataTable>
-							</div>
-							<div class="col-12">
-								<p:divider styleClass="mb-4" />
-								<ui:remove>
-									<p:captcha label="Captcha" language="pt" theme="light"
-										rendered="#{not pessoaBean.actionView}" />
-								</ui:remove>
+                                    <p:column headerText="CEP" field="cep"
+                                              filterMatchMode="contains"
+                                              styleClass="w-8rem xl:w-1 text-center">
+                                        <h:outputText value="#{obj.cep}"/>
+                                    </p:column>
+                                    <p:column headerText="UF" field="uf" filterMatchMode="exact"
+                                              styleClass="w-8rem xl:w-1 text-center">
+                                        <h:outputText value="#{obj.uf}"/>
+                                    </p:column>
+                                    <p:column headerText="Cidade" field="cidade"
+                                              filterMatchMode="contains"
+                                              styleClass="w-16rem xl:w-2 text-center">
+                                        <h:outputText value="#{obj.cidade}"/>
+                                    </p:column>
+                                    <p:column headerText="Bairro" field="bairro"
+                                              filterMatchMode="contains"
+                                              styleClass="w-16rem xl:w-2 text-center">
+                                        <h:outputText value="#{obj.bairro}"/>
+                                    </p:column>
+                                    <p:column headerText="Logradouro" field="logradouro"
+                                              filterMatchMode="contains"
+                                              styleClass="w-16rem xl:w-2 text-center">
+                                        <h:outputText value="#{obj.logradouro}"/>
+                                    </p:column>
+                                    <p:column headerText="Número" field="numero"
+                                              filterMatchMode="exact" styleClass="w-8rem xl:w-1 text-center">
+                                        <h:outputText value="#{obj.numero}"/>
+                                    </p:column>
+                                    <p:column headerText="Complemento" field="complemento"
+                                              filterMatchMode="contains"
+                                              styleClass="w-16rem xl:w-2 text-center">
+                                        <h:outputText
+                                                value="#{empty obj.complemento ? '-' : obj.complemento}"/>
+                                    </p:column>
+                                    <p:column headerText="Ações" styleClass="w-10rem xl:w-1"
+                                              exportable="false">
+                                        <div class="flex flex-column">
+                                            <p:commandLink id="btnEditEndereco"
+                                                           title="Alterar #{obj.label}"
+                                                           actionListener="#{pessoaBean.carregarEndereco(obj)}"
+                                                           process="@this" oncomplete="PF('dlgEndereco').show();"
+                                                           icon="fa fa-pencil" update="formEndereco"
+                                                           disabled="#{pessoaBean.actionView}"
+                                                           styleClass="hover:text-blue-800">
+                                                <i class="fa fa-pencil mr-2"/>Alterar
+                                            </p:commandLink>
+                                            <p:commandLink id="btnDeleteEndereco"
+                                                           title="Excluir #{obj.label}"
+                                                           actionListener="#{pessoaBean.excluirEndereco(obj)}"
+                                                           icon="fa fa-close" update="formSave formList messages"
+                                                           styleClass="text-red-400 hover:text-red-600"
+                                                           disabled="#{pessoaBean.actionView}">
+                                                <p:confirm header="Exclusão de registro"
+                                                           message="Deseja realmente excluir este registro?"
+                                                           icon="fa fa-exclamation-triangle"/>
+                                                <p:ajax update="messages"/>
+                                                <f:setPropertyActionListener value="#{obj}"
+                                                                             target="#{pessoaBean.endereco}"/>
+                                                <i class="fa fa-exclamation-triangle mr-2"/>Excluir
+                                            </p:commandLink>
+                                        </div>
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                            <div class="col-12">
+                                <p:divider styleClass="mb-4"/>
+                                <ui:remove>
+                                    <p:captcha label="Captcha" language="pt" theme="light"
+                                               rendered="#{not pessoaBean.actionView}"/>
+                                </ui:remove>
 
-								<div class="flex flex-wrap gap-2 mt-3">
-									<p:commandButton id="btnSaveAndClean" value="Salvar pessoa"
-										icon="fa fa-save" actionListener="#{pessoaBean.saveAndClean}"
-										disabled="#{pessoaBean.actionView}" title="Salvar pessoa"
-										update="formSave formList messages" />
-									<p:commandButton id="btnLimparCampos" value="Limpar"
-										title="Resetar o preenchimento"
-										styleClass="bg-red-300 border-red-300 hover:bg-red-400"
-										actionListener="#{pessoaBean.limparCampos}"
-										icon="fa fa-eraser" update="formSave messages" process="@this" />
-								</div>
-							</div>
-						</div>
-					</h:form>
-				</div>
-			</div>
+                                <div class="flex flex-wrap gap-2 mt-3">
+                                    <p:commandButton id="btnSaveAndClean" value="Salvar pessoa"
+                                                     icon="fa fa-save" actionListener="#{pessoaBean.saveAndClean}"
+                                                     disabled="#{pessoaBean.actionView}" title="Salvar pessoa"
+                                                     update="formSave formList messages"/>
+                                    <p:commandButton id="btnLimparCampos" value="Limpar"
+                                                     title="Resetar o preenchimento"
+                                                     styleClass="bg-red-300 border-red-300 hover:bg-red-400"
+                                                     actionListener="#{pessoaBean.limparCampos}"
+                                                     icon="fa fa-eraser" update="formSave messages" process="@this"/>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
 
-			<div class="flex align-items-center justify-content-center mt-3">
-				<div
-					class="surface-card p-4 shadow-2 border-round w-full w-12 lg:w-9">
-					<h:form id="formList" prependId="false">
-						<div class="grid">
-							<div class="col-12">
-								<p:dataTable id="dtTablePessoas" widgetVar="wvTablePessoas"
-									var="obj" styleClass="w-full" value="#{pessoaBean.pessoaModel}"
-									paginator="true" rows="5" paginatorPosition="bottom"
-									scrollable="true" scrollWidth="100%"
-									paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
-									currentPageReportTemplate="Página {currentPage} de {totalPages} - Total de {totalRecords} registro(s)"
-									emptyMessage="Nenhum registro foi encontrado.">
+            <div class="flex align-items-center justify-content-center mt-3">
+                <div
+                        class="surface-card p-4 shadow-2 border-round w-full w-12 lg:w-9">
+                    <h:form id="formList" prependId="false">
+                        <div class="grid">
+                            <div class="col-12">
+                                <p:dataTable id="dtTablePessoas" widgetVar="wvTablePessoas"
+                                             var="obj" styleClass="w-full" value="#{pessoaBean.pessoaModel}"
+                                             paginator="true" rows="5" paginatorPosition="bottom"
+                                             scrollable="true" scrollWidth="100%"
+                                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+                                             currentPageReportTemplate="Página {currentPage} de {totalPages} - Total de {totalRecords} registro(s)"
+                                             emptyMessage="Nenhum registro foi encontrado.">
 
-									<p:ajax event="page" />
-									<p:ajax event="sort" />
+                                    <p:ajax event="page"/>
+                                    <p:ajax event="sort"/>
 
-									<f:facet name="header">
-										Lista de pessoas
-									</f:facet>
+                                    <f:facet name="header">
+                                        Lista de pessoas
+                                    </f:facet>
 
-									<f:facet name="footer">
-										<div class="flex gap-3">
-											<p:commandLink title="Exportar PDF" process="@this"
-												styleClass="text-red-400 hover:text-red-600">
-												<i class="fa fa-file-pdf fa-lg" />
-												<p:dataExporter type="pdf" target="dtTablePessoas"
-													fileName="pessoas" encoding="UTF-8"
-													preProcessor="#{pessoaBean.preProcessPessoasPDF}"
-													options="#{pessoaBean.pdfOpt}" />
-											</p:commandLink>
-											<p:commandLink title="Exportar Excel" process="@this"
-												styleClass="text-green-400 hover:text-green-600">
-												<i class="fa fa-file-csv fa-lg" />
-												<p:dataExporter type="csv" target="dtTablePessoas"
-													fileName="pessoas" />
-											</p:commandLink>
-										</div>
-									</f:facet>
+                                    <f:facet name="footer">
+                                        <div class="flex gap-3">
+                                            <p:commandLink title="Exportar PDF" process="@this"
+                                                           styleClass="text-red-400 hover:text-red-600">
+                                                <i class="fa fa-file-pdf fa-lg"/>
+                                                <p:dataExporter type="pdf" target="dtTablePessoas"
+                                                                fileName="pessoas" encoding="UTF-8"
+                                                                preProcessor="#{pessoaBean.preProcessPessoasPDF}"
+                                                                options="#{pessoaBean.pdfOpt}"/>
+                                            </p:commandLink>
+                                            <p:commandLink title="Exportar Excel" process="@this"
+                                                           styleClass="text-green-400 hover:text-green-600">
+                                                <i class="fa fa-file-csv fa-lg"/>
+                                                <p:dataExporter type="csv" target="dtTablePessoas"
+                                                                fileName="pessoas"/>
+                                            </p:commandLink>
+                                        </div>
+                                    </f:facet>
 
-									<p:column headerText="Nome" field="nome"
-										filterMatchMode="contains"
-										styleClass="w-12rem xl:w-4 text-center">
-										<h:outputText value="#{obj.nome}" />
-									</p:column>
-									<p:column headerText="Data de nascimento"
-										sortBy="#{obj.dataNascimento}"
-										styleClass="w-8rem xl:w-2 text-center">
-										<h:outputText value="#{obj.dataNascimento}">
-											<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3" />
-										</h:outputText>
-									</p:column>
-									<p:column headerText="Idade" sortBy="#{obj.idade}"
-										styleClass="w-8rem xl:w-1 text-center">
-										<h:outputText value="#{obj.idade}" />
-									</p:column>
-									<p:column headerText="Sexo" sortBy="#{obj.sexo.descricao}"
-										styleClass="w-6rem xl:w-1 text-center">
-										<h:outputText value="#{obj.sexo.descricao}" />
-									</p:column>
-									<p:column headerText="IP" sortBy="#{obj.ip}"
-										styleClass="w-6rem xl:w-1 text-center">
-										<h:outputText value="#{obj.ip}" />
-									</p:column>
-									<p:column headerText="Data do envio" sortBy="#{obj.dataEnvio}"
-										styleClass="w-10rem xl:w-2 text-center">
-										<h:outputText value="#{obj.dataEnvio}">
-											<f:convertDateTime pattern="dd/MM/yyyy 'às' HH:mm"
-												timeZone="GMT-3" />
-										</h:outputText>
-									</p:column>
-									<p:column headerText="Ações" styleClass="w-10rem xl:w-1"
-										exportable="false">
-										<div class="flex flex-column">
-											<p:commandLink id="btnViewPessoa"
-												title="Visualizar #{obj.nome}"
-												actionListener="#{pessoaBean.loadViewMode(obj)}"
-												update="formSave formList messages" icon="fa fa-pencil"
-												styleClass="hover:text-blue-800">
-												<i class="fa fa-search mr-2" />Visualizar
-												</p:commandLink>
-											<p:commandLink id="btnEditPessoa" title="Alterar #{obj.nome}"
-												actionListener="#{pessoaBean.loadEditMode(obj)}"
-												update="formSave formList messages" icon="fa fa-pencil"
-												styleClass="hover:text-blue-800">
-												<i class="fa fa-pencil mr-2" />Alterar
-												</p:commandLink>
-											<p:commandLink id="btnDeletePessoa"
-												title="Excluir #{obj.nome}"
-												actionListener="#{pessoaBean.delete(obj)}"
-												icon="fa fa-close" update="formList messages"
-												styleClass="text-red-400 hover:text-red-600">
-												<p:confirm header="Exclusão de registro"
-													message="Deseja realmente excluir este registro?"
-													icon="fa fa-exclamation-triangle" />
-												<f:setPropertyActionListener value="#{obj}"
-													target="#{pessoaBean.entity}" />
-												<i class="fa fa-exclamation-triangle mr-2" />Excluir
-												</p:commandLink>
-										</div>
-									</p:column>
-								</p:dataTable>
-							</div>
-						</div>
-					</h:form>
-				</div>
-			</div>
+                                    <p:column headerText="Nome" field="nome"
+                                              filterMatchMode="contains"
+                                              styleClass="w-12rem xl:w-4 text-center">
+                                        <h:outputText value="#{obj.nome}"/>
+                                    </p:column>
+                                    <p:column headerText="Data de nascimento"
+                                              sortBy="#{obj.dataNascimento}"
+                                              styleClass="w-8rem xl:w-2 text-center">
+                                        <h:outputText value="#{obj.dataNascimento}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-3"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Idade" sortBy="#{obj.idade}"
+                                              styleClass="w-8rem xl:w-1 text-center">
+                                        <h:outputText value="#{obj.idade}"/>
+                                    </p:column>
+                                    <p:column headerText="Sexo" sortBy="#{obj.sexo.descricao}"
+                                              styleClass="w-6rem xl:w-1 text-center">
+                                        <h:outputText value="#{obj.sexo.descricao}"/>
+                                    </p:column>
+                                    <p:column headerText="IP" sortBy="#{obj.ip}"
+                                              styleClass="w-6rem xl:w-1 text-center">
+                                        <h:outputText value="#{obj.ip}"/>
+                                    </p:column>
+                                    <p:column headerText="Data do envio" sortBy="#{obj.dataEnvio}"
+                                              styleClass="w-10rem xl:w-2 text-center">
+                                        <h:outputText value="#{obj.dataEnvio}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy 'às' HH:mm"
+                                                               timeZone="GMT-3"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Ações" styleClass="w-10rem xl:w-1"
+                                              exportable="false">
+                                        <div class="flex flex-column">
+                                            <p:commandLink id="btnViewPessoa"
+                                                           title="Visualizar #{obj.nome}"
+                                                           actionListener="#{pessoaBean.loadViewMode(obj)}"
+                                                           update="formSave formList messages" icon="fa fa-pencil"
+                                                           styleClass="hover:text-blue-800">
+                                                <i class="fa fa-search mr-2"/>Visualizar
+                                            </p:commandLink>
+                                            <p:commandLink id="btnEditPessoa" title="Alterar #{obj.nome}"
+                                                           actionListener="#{pessoaBean.loadEditMode(obj)}"
+                                                           update="formSave formList messages" icon="fa fa-pencil"
+                                                           styleClass="hover:text-blue-800">
+                                                <i class="fa fa-pencil mr-2"/>Alterar
+                                            </p:commandLink>
+                                            <p:commandLink id="btnDeletePessoa"
+                                                           title="Excluir #{obj.nome}"
+                                                           actionListener="#{pessoaBean.delete(obj)}"
+                                                           icon="fa fa-close" update="formList messages"
+                                                           styleClass="text-red-400 hover:text-red-600">
+                                                <p:confirm header="Exclusão de registro"
+                                                           message="Deseja realmente excluir este registro?"
+                                                           icon="fa fa-exclamation-triangle"/>
+                                                <f:setPropertyActionListener value="#{obj}"
+                                                                             target="#{pessoaBean.entity}"/>
+                                                <i class="fa fa-exclamation-triangle mr-2"/>Excluir
+                                            </p:commandLink>
+                                        </div>
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
 
-			<div class="flex align-items-center justify-content-center mt-3">
-				<div
-					class="surface-card p-4 shadow-2 border-round w-full w-12 lg:w-9">
-					<div class="flex justify-content-between flex-wrap">
-						<h:outputText styleClass="text-xs"
-							value="Versão #{propertySourceConfig.appVersionNumber} (#{propertySourceConfig.appVersionDate})" />
-						<h:outputText styleClass="text-xs"
-							value="Desenvolvido por: #{propertySourceConfig.appOwner}" />
-					</div>
-				</div>
-			</div>
-		</div>
+            <div class="flex align-items-center justify-content-center w-full mt-3">
+                <div class="lg:w-9">
+                    <ui:include src="resources/template/footer.xhtml"/>
+                </div>
+            </div>
+        </div>
 
-		<h:form id="formEndereco" prependId="false">
-			<p:dialog id="dlgEndereco" header="Endereço" widgetVar="dlgEndereco"
-				modal="true" blockScroll="true" closeOnEscape="false"
-				fitViewport="true" position="center center" width="800"
-				onShow="PF('dlgEndereco').initPosition();" responsive="true"
-				draggable="false" focus="id">
+        <h:form id="formEndereco" prependId="false">
+            <p:dialog id="dlgEndereco" header="Endereço" widgetVar="dlgEndereco"
+                      modal="true" blockScroll="true" closeOnEscape="false"
+                      fitViewport="true" position="center center" width="800"
+                      onShow="PF('dlgEndereco').initPosition();" responsive="true"
+                      draggable="false" focus="id">
 
-				<h:inputHidden id="id" value="#{pessoaBean.endereco.id}" />
+                <h:inputHidden id="id" value="#{pessoaBean.endereco.id}"/>
 
-				<div class="formgrid grid">
-					<div class="field col-12">
-						<h:outputText
-							value="Informe o CEP que os campos de endereço serão preenchidos automaticamente." />
-					</div>
-					<div class="field col-6 sm:col-3 md:col-2 lg:col-2 xl:col-2">
-						<p:outputLabel for="@next" value="CEP:" styleClass="block" />
-						<p:inputMask id="cep" mask="99999999" placeholder="________"
-							value="#{pessoaBean.endereco.cep}"
-							disabled="#{pessoaBean.actionView}" styleClass="w-full">
-							<p:ajax event="blur"
-								listener="#{pessoaBean.carregarEnderecoPeloCep}"
-								update="messages uf cidade bairro logradouro cep" />
-						</p:inputMask>
-					</div>
-					<div class="field col-6 sm:col-3 md:col-2 lg:col-2 xl:col-2">
-						<p:outputLabel for="@next" value="UF:" styleClass="block" />
-						<p:inputText id="uf" value="#{pessoaBean.endereco.uf}"
-							disabled="true" styleClass="block w-full" />
-					</div>
-					<div class="field col-12 sm:col-6 md:col-4 lg:col-4 xl:col-4">
-						<p:outputLabel for="@next" value="Cidade:" styleClass="block" />
-						<p:inputText id="cidade" value="#{pessoaBean.endereco.cidade}"
-							disabled="true" styleClass="block w-full" />
-					</div>
-					<div class="field col-12 sm:col-6 md:col-4 lg:col-4 xl:col-4">
-						<p:outputLabel for="@next" value="Bairro:" styleClass="block" />
-						<p:inputText id="bairro" value="#{pessoaBean.endereco.bairro}"
-							disabled="true" styleClass="block w-full" />
-					</div>
-					<div class="field col-12 sm:col-6 md:col-4 lg:col-4 xl:col-4">
-						<p:outputLabel for="@next" value="Logradouro:" styleClass="block" />
-						<p:inputText id="logradouro"
-							value="#{pessoaBean.endereco.logradouro}" disabled="true"
-							styleClass="block w-full" />
-					</div>
-					<div class="field col-4 sm:col-3 md:col-2 lg:col-2 xl:col-2">
-						<p:outputLabel for="@next" value="Número:" styleClass="block" />
-						<p:spinner id="numero" value="#{pessoaBean.endereco.numero}"
-							styleClass="block w-full" min="0" />
-					</div>
-					<div class="field col-8 sm:col-9 md:col-6 lg:col-4 xl:col-6">
-						<p:outputLabel for="@next" value="Complemento:" styleClass="block" />
-						<p:inputText id="complemento"
-							value="#{pessoaBean.endereco.complemento}"
-							styleClass="block w-full" />
-					</div>
-				</div>
-				<f:facet name="footer">
-					<p:commandButton id="btnAdicionarEndereco"
-						value="Adicionar endereço" title="Adicionar endereço"
-						icon="fa fa-save" actionListener="#{pessoaBean.salvarEndereco}"
-						update="dtTableEndereco messages cep uf cidade bairro logradouro numero complemento" />
+                <div class="formgrid grid">
+                    <div class="field col-12">
+                        <h:outputText
+                                value="Informe o CEP que os campos de endereço serão preenchidos automaticamente."/>
+                    </div>
+                    <div class="field col-6 sm:col-3 md:col-2 lg:col-2 xl:col-2">
+                        <p:outputLabel for="@next" value="CEP:" styleClass="block"/>
+                        <p:inputMask id="cep" mask="99999999" placeholder="________"
+                                     value="#{pessoaBean.endereco.cep}"
+                                     disabled="#{pessoaBean.actionView}" styleClass="w-full">
+                            <p:ajax event="blur"
+                                    listener="#{pessoaBean.carregarEnderecoPeloCep}"
+                                    update="messages uf cidade bairro logradouro cep"/>
+                        </p:inputMask>
+                    </div>
+                    <div class="field col-6 sm:col-3 md:col-2 lg:col-2 xl:col-2">
+                        <p:outputLabel for="@next" value="UF:" styleClass="block"/>
+                        <p:inputText id="uf" value="#{pessoaBean.endereco.uf}"
+                                     disabled="true" styleClass="block w-full"/>
+                    </div>
+                    <div class="field col-12 sm:col-6 md:col-4 lg:col-4 xl:col-4">
+                        <p:outputLabel for="@next" value="Cidade:" styleClass="block"/>
+                        <p:inputText id="cidade" value="#{pessoaBean.endereco.cidade}"
+                                     disabled="true" styleClass="block w-full"/>
+                    </div>
+                    <div class="field col-12 sm:col-6 md:col-4 lg:col-4 xl:col-4">
+                        <p:outputLabel for="@next" value="Bairro:" styleClass="block"/>
+                        <p:inputText id="bairro" value="#{pessoaBean.endereco.bairro}"
+                                     disabled="true" styleClass="block w-full"/>
+                    </div>
+                    <div class="field col-12 sm:col-6 md:col-4 lg:col-4 xl:col-4">
+                        <p:outputLabel for="@next" value="Logradouro:" styleClass="block"/>
+                        <p:inputText id="logradouro"
+                                     value="#{pessoaBean.endereco.logradouro}" disabled="true"
+                                     styleClass="block w-full"/>
+                    </div>
+                    <div class="field col-4 sm:col-3 md:col-2 lg:col-2 xl:col-2">
+                        <p:outputLabel for="@next" value="Número:" styleClass="block"/>
+                        <p:spinner id="numero" value="#{pessoaBean.endereco.numero}"
+                                   styleClass="block w-full" min="0"/>
+                    </div>
+                    <div class="field col-8 sm:col-9 md:col-6 lg:col-4 xl:col-6">
+                        <p:outputLabel for="@next" value="Complemento:" styleClass="block"/>
+                        <p:inputText id="complemento"
+                                     value="#{pessoaBean.endereco.complemento}"
+                                     styleClass="block w-full"/>
+                    </div>
+                </div>
+                <f:facet name="footer">
+                    <p:commandButton id="btnAdicionarEndereco"
+                                     value="Adicionar endereço" title="Adicionar endereço"
+                                     icon="fa fa-save" actionListener="#{pessoaBean.salvarEndereco}"
+                                     update="dtTableEndereco messages cep uf cidade bairro logradouro numero complemento"/>
 
-					<p:commandButton id="btnFecharDialog" value="Fechar"
-						title="Fechar janela" icon="fa fa-close"
-						styleClass="bg-red-300 border-red-300"
-						onclick="PF('dlgEndereco').hide();" />
-				</f:facet>
-			</p:dialog>
-		</h:form>
-	</ui:define>
+                    <p:commandButton id="btnFecharDialog" value="Fechar"
+                                     title="Fechar janela" icon="fa fa-close"
+                                     styleClass="bg-red-300 border-red-300"
+                                     onclick="PF('dlgEndereco').hide();"/>
+                </f:facet>
+            </p:dialog>
+        </h:form>
+    </ui:define>
 </ui:composition>

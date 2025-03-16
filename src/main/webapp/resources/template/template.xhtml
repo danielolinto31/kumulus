@@ -1,70 +1,70 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui" lang="pt-br">
 
 <h:head>
 	<f:facet name="first">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 		<meta name="viewport"
-			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<h:outputStylesheet name="style.css" library="css" />
-		<h:outputStylesheet name="primeflex.css" library="css" />
-		<h:outputStylesheet library="webjars" name="font-awesome/6.7.2/css/all.min-jsf.css" />
-		<h:outputStylesheet library="webjars" name="font-awesome/6.7.2/css/v4-shims.min-jsf.css" />
+			  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<h:outputStylesheet name="style.css" library="css"/>
+		<h:outputStylesheet name="primeflex.css" library="css"/>
+		<h:outputStylesheet library="webjars" name="font-awesome/6.7.2/css/all.min-jsf.css"/>
+		<h:outputStylesheet library="webjars" name="font-awesome/6.7.2/css/v4-shims.min-jsf.css"/>
+		<link rel="shortcut icon" href="#{resource['images:favicon.ico']}" type="img/x-icon"/>
 	</f:facet>
-	<title>Kumulus | <ui:insert name="title" /></title>
-	<link rel="shortcut icon" href="#{resource['images:favicon.ico']}"
-		type="img/x-icon" />
+	<title>Kumulus | <ui:insert name="title"/></title>
 
-	<ui:insert name="head" />
+	<h:outputScript library="js" name="locales.js"/>
+	<h:outputScript library="js" name="fontaewsome.js"/>
+
+	<ui:insert name="head"/>
 </h:head>
 
 <h:body>
 	<p:ajaxStatus onstart="PF('statusDialog').show()"
-		onsuccess="PF('statusDialog').hide()"
-		oncomplete="PF('statusDialog').hide()"
-		onerror="PF('statusDialog').hide()">
+				  onsuccess="PF('statusDialog').hide()"
+				  oncomplete="PF('statusDialog').hide()"
+				  onerror="PF('statusDialog').hide()">
 
-		<p:tooltip globalSelector="i,a,button,input,span" position="bottom" />
+		<p:tooltip globalSelector="i,a,button,input,span" position="bottom"/>
 
 		<ui:insert name="content">
-		    Template
+			Template
 		</ui:insert>
 	</p:ajaxStatus>
 
 	<p:confirmDialog global="true" closeOnEscape="true" modal="true"
-		width="400" showEffect="fade" hideEffect="fade" responsive="true"
-		closable="false">
+					 width="400" showEffect="fade" hideEffect="fade" responsive="true"
+					 closable="false">
 		<p:commandButton value="Sim" type="button"
-			styleClass="ui-confirmdialog-yes bg-red-300 border-red-300"
-			icon="fa fa-check" title="Sim" />
+						 styleClass="ui-confirmdialog-yes bg-red-300 border-red-300"
+						 icon="fa fa-check" title="Sim"/>
 		<p:commandButton value="Não" type="button"
-			styleClass="ui-confirmdialog-no" icon="fa fa-close" title="Não" />
+						 styleClass="ui-confirmdialog-no" icon="fa fa-close" title="Não"/>
 	</p:confirmDialog>
 
 	<p:dialog widgetVar="statusDialog" draggable="false" resizable="false"
-		closable="false" fitViewport="true" width="225"
-		styleClass="statusCarregando border-round-md" showEffect="fade"
-		onShow="PF('statusDialog').initPosition()" hideEffect="clip"
-		blockScroll="true" responsive="true" showHeader="false"
-		position="center center" modal="true">
+			  closable="false" fitViewport="true" width="225"
+			  styleClass="statusCarregando border-round-md" showEffect="fade"
+			  onShow="PF('statusDialog').initPosition()" hideEffect="clip"
+			  blockScroll="true" responsive="true" showHeader="false"
+			  position="center center" modal="true">
 		<div class="flex align-content-center justify-content-center p-3">
 			<div class="block">
-				<i class="fa fa-circle-o-notch fa-spin fa-4x fa-fw"></i>
+				<i class="fa fa-circle-o-notch fa-spin fa-4x fa-fw" />
 				<h:outputText value="Carregando..."
-					styleClass="block text-sm font-medium mt-2" />
+							  styleClass="block text-sm font-medium mt-2"/>
 				<span class="sr-only">Carregando...</span>
 			</div>
 		</div>
 	</p:dialog>
 
-	<h:outputScript library="js" name="locales.js" target="head" />
-	<h:outputScript library="js" name="fontaewsome.js" target="head" />
+	<p:scrollTop target="window" threshold="200" styleClass="custom-scrolltop" icon="fa fa-arrow-up"/>
 </h:body>
 
 </html>

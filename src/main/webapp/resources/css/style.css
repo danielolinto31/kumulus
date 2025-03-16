@@ -251,3 +251,18 @@ body .ui-commandlink:hover, body .ui-link:hover {
 .hasDatepicker {
 	width: 100% !important;
 }
+.custom-scrolltop.ui-scrolltop {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 4px;
+    outline: 0 none;
+    background-color: var(--primary-color);
+}
+.custom-scrolltop.ui-scrolltop:hover {
+        background-color: var(--primary-color);
+    }
+
+.custom-scrolltop.ui-scrolltop .ui-scrolltop-icon {
+    font-size: 1rem;
+    color: var(--primary-color-text);
+}

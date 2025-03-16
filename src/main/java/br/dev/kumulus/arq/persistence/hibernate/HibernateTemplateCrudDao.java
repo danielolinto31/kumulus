@@ -141,7 +141,7 @@ public abstract class HibernateTemplateCrudDao<T extends Persistent> implements 
 			 * R2, MySQL 5, Postgres 9.X), mas em alguns bancos, como o SQL Server 2019
 			 * (versão em container), acaba ocorrendo o erro abaixo.
 			 * org.hibernate.PersistentObjectException: detached entity passed to persist:
-			 * br.dev.kumulus.domain.Curriculo Como solução, usar o
+			 * br.dev.kumulus.domain.Pessoa Como solução, usar o
 			 * "ht.merge(entity);"
 			 */
 			try {

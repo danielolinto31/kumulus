@@ -67,6 +67,7 @@ public class PessoaBean extends AbstractCrudBean<Pessoa, PessoaService> {
 	private static final String MESSAGE_ERRO_IP = "Erro ao capturar o IP do usuário";
 	private static final String MESSAGE_ERRO_ENDERECO_EXCLUIR = "Não foi possível excluir o endereço. A lista de endereços não pode estar vazia";
 	private static final String MESSAGE_VALIDACAO_DATA_NASCIMENTO = "A data de nascimento não pode ser maior que a data atual";
+	private static final String ID_TABELA_ENDERECO = "dtTableEndereco";
 
 	private final EnderecoService enderecoService;
 	private transient ViaCep viaCep = new ViaCepServiceImpl();
@@ -88,6 +89,18 @@ public class PessoaBean extends AbstractCrudBean<Pessoa, PessoaService> {
 		super(service);
 		this.enderecoService = enderecoService;
 		personalizacaoExportacao();
+	}
+
+	@Override
+	protected void onAfterLoadViewMode(Pessoa entityToView) {
+		PrimeFaces.current().scrollTo(ID_TABELA_ENDERECO);
+		super.onAfterLoadViewMode(entityToView);
+	}
+
+	@Override
+	protected void onAfterLoadEditMode(Pessoa entityToEdit) {
+		PrimeFaces.current().scrollTo(ID_TABELA_ENDERECO);
+		super.onAfterLoadEditMode(entityToEdit);
 	}
 
 	@Override
@@ -197,7 +210,6 @@ public class PessoaBean extends AbstractCrudBean<Pessoa, PessoaService> {
 				}
 			}
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
 			log.error(ERRO, e);
 			addError(MESSAGE_ERRO_IP);
 		}
@@ -226,7 +238,6 @@ public class PessoaBean extends AbstractCrudBean<Pessoa, PessoaService> {
 				addWarning(MESSAGE_VIACEP_CEP_NAO_ENCONTRADO);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			log.error(ERRO, e);
 			addError(MESSAGE_ERRO_VIACEP + e.getMessage());
 		}
